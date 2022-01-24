@@ -1,6 +1,6 @@
-"""EX01 - Charlde - A cute step toward wordle"""
+"""EX01 - Charlde - A cute step toward wordle."""
 
-__author__ = 730464883
+__author__ = "730464883"
 
 
 secret_word: str = (input("Enter a 5-character word:"))
@@ -29,20 +29,20 @@ if secret_word[3] == guess:
 if secret_word[4] == guess:
     print(guess + " found at index 4")
 
-if secret_word.count(guess)==1:
+if secret_word.count(guess) == 1:
     print("1 instance of " + guess + " found in " + secret_word)
 
-if secret_word.count(guess)==2:
+if secret_word.count(guess) == 2:
     print("2 instances of " + guess + " found in " + secret_word)
 
-if secret_word.count(guess)==0:
+if secret_word.count(guess) == 0:
     print("No instances of " + guess + " found in " + secret_word)
 
-if secret_word.count(guess)==3:
+if secret_word.count(guess) == 3:
     print("3 instances of " + guess + " found in " + secret_word)
 
-if secret_word.count(guess)==4:
+if secret_word.count(guess) == 4:
     print("4 instances of " + guess + " found in " + secret_word)
 
-if secret_word.count(guess)==5:
+if secret_word.count(guess) == 5:
     print("5 instances of " + guess + " found in " + secret_word)
