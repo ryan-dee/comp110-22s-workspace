@@ -1,6 +1,6 @@
 """EX01 - Charlde - A cute step toward wordle."""
 
-__author__ = "730464883"
+__author__ = "730464883" 
 
 
 secret_word: str = (input("Enter a 5-character word:"))
