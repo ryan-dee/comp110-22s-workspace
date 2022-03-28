@@ -72,11 +72,14 @@ def select(given: dict[str, list[str]], names: list[str]) -> dict[str, list[str]
 def concat(first: dict[str, list[str]], second: dict[str, list[str]]) -> dict[str, list[str]]:
     """Give all lists without duplicates."""
     overall: dict[str, list[str]] = {}
-    for columns in first:
-        overall = first
+    for keys in first:
+        overall[keys] = first[keys]
     for columns in second:
-        if second in overall:
-            overall = second
+        if columns in overall:
+            i: int = 0
+            while i < len(second[columns]):
+                overall[columns].append(second[columns][i])
+                i += 1
         else:
             overall[columns] = second[columns]
     return overall
