@@ -11,16 +11,11 @@ from csv import DictReader
 def read_csv_rows(file: str) -> list[dict[str, str]]:
     """Read CSV file into list."""
     final: list[dict[str, str]] = []
-
     file_handle = open(file, "r", encoding="utf8")
-
     csv_reader = DictReader(file_handle)
-
     for row in csv_reader:
         final.append(row)
-    
     file_handle.close
-    
     return final
 
 
@@ -36,11 +31,9 @@ def column_values(table: list[dict[str, str]], column: str) -> list[str]:
 def columnar(row_table: list[dict[str, str]]) -> dict[str, list[str]]:
     """Transform a row-oriented table to a column oriented table."""
     new: dict[str, list[str]] = {}
-    
     first_row: dict[str, str] = row_table[0]
     for column in first_row:
         new[column] = column_values(row_table, column)
-    
     return new
 
 
@@ -50,14 +43,13 @@ def head(data: dict[str, list[str]], N: int) -> dict[str, list[str]]:
         return data
     else:
         ret_dict: dict[str, list[str]] = {}
-        for columns in data:
-            new_list: list[str] = []
-            if N < len(data):    
-                i: int = 0
-                while i < N:
-                    new_list.append(data[columns][i])
-                    i += 1
-                ret_dict[columns] = new_list
+        new_list: list[str] = []
+        for columns in data:    
+            i: int = 0
+            while i < N:
+                new_list.append(data[columns][i])
+                i += 1
+            ret_dict[columns] = new_list
         return ret_dict
 
 
