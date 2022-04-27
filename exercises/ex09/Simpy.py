@@ -25,21 +25,29 @@ class Simpy:
         return f"({self.values})"
 
     def fill(self, numbers: float, amount: int):
+        """Fill in the numbers that are missing."""
         i: int = 0
         while i < amount:
             self.values.append(numbers)
             i = i + 1
 
-    def arange(self, start: float, stop: float, step: float = 1.0) -> list[float]:
-        assert step != 0
-        res_list: list[float] = []
+    def arange(self, start: float, stop: float, step: float = 1.0) -> None:
+        """Define a range of numbers."""
+        assert step != 0.0
+        self.values.clear()
         i: float = start
-        while i <= stop:
-            res_list.append(i)
-            i = i + step
-        return res_list
+        if step > 0:
+            while i < stop:
+                self.values.append(i)
+                i = i + step
+        if step < 0:
+            while i > stop:
+                self.values.append(i)
+                i = i + step
+        return 
 
     def sum(self) -> float:
+        """Create sum of self values."""
         ret_value: float = 0
         i: int = 0
         while i < len(self.values):
@@ -105,11 +113,17 @@ class Simpy:
                     res_gt.append(False)
         return res_gt
 
-    def __getitem__(self, rhs: int) -> float:
+    def __getitem__(self, rhs: Union[int, list[bool]]) -> Union[float, Simpy]:
         """Get item magic method."""
         ret_float: float = 0
-        if rhs < len(self.values):
-            ret_float = self.values[rhs]
-        return ret_float
-
-    # def __getitems__(self, rhs: Union[int, list[bool]]) -> Union[float, Simpy]:
+        if isinstance(rhs, int):
+            if rhs < len(self.values):
+                ret_float = self.values[rhs]
+            return ret_float
+        else:
+            ret_list: list[float] = []
+            assert len(self.values) == len(rhs)
+            for idx in range(0, len(rhs)):
+                if rhs[idx] is True:
+                    ret_list.append(self.values[idx])
+            return Simpy(ret_list)
